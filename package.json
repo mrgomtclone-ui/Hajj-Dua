@@ -2,15 +2,21 @@
   "name": "haj-duas-app",
   "private": true,
   "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
     "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"magenta,cyan\" \"npm run backend\" \"npm run frontend\"",
     "dev:all": "npm run dev",
     "backend": "npm --prefix backend run dev",
     "frontend": "npm --prefix frontend run dev",
     "seed": "npm --prefix backend run seed",
-    "build:frontend": "npm --prefix frontend run build",
-    "build:backend": "npm --prefix backend run build",
-    "build": "npm run build:frontend && npm run build:backend"
+    "install:all": "npm install --prefix backend --include=dev && npm install --prefix frontend --include=dev",
+    "build:frontend": "npm --prefix frontend install --include=dev && npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend install --include=dev && npm --prefix backend run build",
+    "build": "npm run build:frontend && npm run build:backend",
+    "start": "npm --prefix backend start"
   },
   "devDependencies": {
     "concurrently": "^10.0.6"

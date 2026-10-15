@@ -1,5 +1,6 @@
 import { z } from "zod";
 try { process.loadEnvFile(); } catch {}
+try { process.loadEnvFile(new URL("../../.env", import.meta.url)); } catch {}
 const schema = z.object({
   PORT: z.coerce.number().default(4000),
   MONGO_URI: z.string().min(1),
