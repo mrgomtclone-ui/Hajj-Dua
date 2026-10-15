@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Environment variables & credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!*.env.example
+
+# Build & production outputs
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Debug logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System & OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE (exclude personal settings, keep shared configs)
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

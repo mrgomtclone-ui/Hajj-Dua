@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   NOOR AL-ISLAM — Theme System
+   Token-driven: swap [data-theme="light"] to flip every surface.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── DARK THEME (default) ── */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-base:        #050c1a;
+  --bg-deep:        #06102a;
+  --bg-navy:        #091432;
+  --bg-card:        rgba(11, 24, 61, 0.70);
+  --bg-card-hover:  rgba(16, 31, 78, 0.88);
+  --bg-panel:       rgba(9, 20, 50, 0.82);
+  --bg-dropdown:    rgba(8, 17, 44, 0.92);
+  --bg-input:       rgba(6, 16, 42, 0.80);
+
+  --border-gold:    rgba(212, 175, 55, 0.18);
+  --border-gold-md: rgba(212, 175, 55, 0.30);
+  --border-gold-hi: rgba(212, 175, 55, 0.50);
+
+  --text-primary:   #f0e6d3;
+  --text-muted:     #8b9ec7;
+  --text-subtle:    #4a5a82;
+  --text-heading:   #f0d060;
+
+  --gold-dim:       #8a6d1a;
+  --gold-base:      #c9a227;
+  --gold-bright:    #d4af37;
+  --gold-light:     #f0d060;
+  --gold-glow:      #fde68a;
+
+  --teal-base:      #0f9690;
+  --teal-bright:    #14c4bb;
+
+  /* BG star pattern opacity for dark */
+  --star-opacity: 0.035;
+
+  /* Scroll track */
+  --scroll-track: #06102a;
+
+  /* Card shimmer */
+  --card-shimmer: rgba(212, 175, 55, 0.10);
+
+  /* Playing card */
+  --playing-bg:   rgba(13, 22, 55, 0.92);
+
+  /* cat-chip inactive bg */
+  --chip-bg: rgba(11, 24, 61, 0.70);
+
+  /* Arabic block bg */
+  --arabic-bg-1: rgba(6, 16, 42, 0.95);
+  --arabic-bg-2: rgba(8, 20, 52, 0.90);
+  --arabic-card-bg: #0b183d;
+
+  /* Body glow stops */
+  --body-glow-gold: rgba(212, 175, 55, 0.07);
+  --body-glow-teal: rgba(20, 196, 187, 0.06);
+  --body-glow-gold2: rgba(212, 175, 55, 0.05);
+
+  /* Hero Banner Tokens (Dark) */
+  --hero-bg:           linear-gradient(135deg, #071533 0%, #0c2352 50%, #05102a 100%);
+  --hero-border:       rgba(212, 175, 55, 0.32);
+  --hero-shadow:       0 20px 45px -10px rgba(0, 0, 0, 0.65), 0 0 35px -5px rgba(212, 175, 55, 0.15);
+  --hero-glow:         rgba(212, 175, 55, 0.18);
+  --hero-title:        #fde68a;
+  --hero-desc:         #b4c6e7;
+  --hero-badge-bg:     rgba(212, 175, 55, 0.15);
+  --hero-badge-border: rgba(212, 175, 55, 0.32);
+  --hero-badge-text:   #fde68a;
+  --hero-btn-font-bg:  rgba(10, 25, 62, 0.85);
+  --hero-btn-font-border: rgba(212, 175, 55, 0.28);
+  --hero-btn-font-text: #f0e6d3;
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-base:        #faf7f0;
+  --bg-deep:        #f3edd8;
+  --bg-navy:        #ede4cc;
+  --bg-card:        rgba(255, 252, 245, 0.88);
+  --bg-card-hover:  rgba(255, 249, 235, 0.96);
+  --bg-panel:       rgba(255, 252, 242, 0.90);
+  --bg-dropdown:    rgba(255, 253, 246, 0.96);
+  --bg-input:       rgba(255, 250, 235, 0.92);
+
+  --border-gold:    rgba(180, 140, 30, 0.25);
+  --border-gold-md: rgba(180, 140, 30, 0.40);
+  --border-gold-hi: rgba(180, 140, 30, 0.65);
+
+  --text-primary:   #2c1d00;
+  --text-muted:     #6b5220;
+  --text-subtle:    #a08040;
+  --text-heading:   #8a5e00;
+
+  --gold-dim:       #a07820;
+  --gold-base:      #b8860b;
+  --gold-bright:    #c9920f;
+  --gold-light:     #8a5e00;
+  --gold-glow:      #5c3d00;
+
+  --teal-base:      #0a6e6a;
+  --teal-bright:    #0b8a84;
+
+  --star-opacity: 0.06;
+  --scroll-track: #ede4cc;
+  --card-shimmer: rgba(180, 140, 30, 0.08);
+  --playing-bg:   rgba(255, 248, 220, 0.95);
+  --chip-bg: rgba(240, 225, 185, 0.70);
+  --arabic-bg-1: rgba(255, 248, 220, 0.98);
+  --arabic-bg-2: rgba(255, 243, 200, 0.95);
+  --arabic-card-bg: #f8f0d8;
+  --body-glow-gold: rgba(212, 175, 55, 0.10);
+  --body-glow-teal: rgba(20, 196, 187, 0.06);
+  --body-glow-gold2: rgba(212, 175, 55, 0.07);
+
+  /* Hero Banner Tokens (Light) */
+  --hero-bg:           linear-gradient(135deg, #fffdf8 0%, #f6edd4 55%, #fcf7ea 100%);
+  --hero-border:       rgba(180, 140, 30, 0.38);
+  --hero-shadow:       0 18px 40px -10px rgba(180, 140, 30, 0.20), 0 4px 15px rgba(0, 0, 0, 0.04);
+  --hero-glow:         rgba(212, 175, 55, 0.22);
+  --hero-title:        #4e3505;
+  --hero-desc:         #6b5220;
+  --hero-badge-bg:     rgba(212, 175, 55, 0.16);
+  --hero-badge-border: rgba(180, 140, 30, 0.38);
+  --hero-badge-text:   #784e00;
+  --hero-btn-font-bg:  rgba(255, 252, 242, 0.95);
+  --hero-btn-font-border: rgba(180, 140, 30, 0.38);
+  --hero-btn-font-text: #4e3505;
+}
+
+/* ── Hero Banner Utility ── */
+.islamic-hero-banner {
+  background: var(--hero-bg);
+  border: 1px solid var(--hero-border);
+  box-shadow: var(--hero-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Smooth theme transition ── */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+/* Exclude transforms/opacity from the blanket transition */
+button, a, input, select { transition-property: background-color, border-color, color, box-shadow, filter, transform; }
+
+/* ══════════════════════════════
+   BODY & BACKGROUND
+   ══════════════════════════════ */
+body {
+  margin: 0;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background-image:
+    radial-gradient(ellipse 60% 50% at 10% 5%,  var(--body-glow-gold) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 90% 15%,  var(--body-glow-teal) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, var(--body-glow-gold2) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='rgba(180%2C140%2C30%2C0.05)' stroke-width='0.5'%3E%3Cpolygon points='40%2C4 47%2C28 72%2C28 52%2C44 60%2C68 40%2C54 20%2C68 28%2C44 8%2C28 33%2C28'/%3E%3Ccircle cx='40' cy='40' r='35'/%3E%3C/g%3E%3C/svg%3E");
+
+  background-attachment: fixed;
+}
+
+/* ── Custom Scrollbars ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--gold-base); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-bright); }
+
+/* ═════════════════════════════════════
+   GLASS SURFACES  (token-driven)
+   ═════════════════════════════════════ */
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-gold);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-gold);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Corner shimmer */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle at top right, var(--card-shimmer), transparent 70%);
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .glass-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-gold-md);
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 30px -8px rgba(0, 0, 0, 0.15),
+      0 0 20px -5px rgba(212, 175, 55, 0.10),
+      inset 0 1px 0 var(--card-shimmer);
+  }
+}
+
+/* Modals */
+.glass-dropdown {
+  background: var(--bg-dropdown);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-gold-md);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.25),
+    0 0 40px -10px rgba(212, 175, 55, 0.08);
+}
+
+/* ═══════════════════════════
+   GOLD GRADIENT UTILITIES
+   ═══════════════════════════ */
+.gold-gradient {
+  background: linear-gradient(135deg, var(--gold-base) 0%, var(--gold-glow) 50%, var(--gold-base) 100%);
+}
+
+/* ═══════════════════════════
+   ANIMATIONS
+   ═══════════════════════════ */
+@keyframes starSpin    { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+@keyframes crescentSpin{ from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
+@keyframes goldPulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(212, 175, 55, 0.45); }
+  50%       { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0.00); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes themeFade {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+.star-spin   { animation: starSpin 8s linear infinite; }
+.gold-pulse  { animation: goldPulse 2s ease-in-out infinite; }
+.theme-fade  { animation: themeFade 0.25s ease; }
+
+/* ═══════════════════════════
+   LOADING SPINNER
+   ═══════════════════════════ */
+.crescent-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border-gold);
+  border-top-color:  var(--gold-bright);
+  border-right-color: rgba(212, 175, 55, 0.6);
+  border-radius: 50%;
+  animation: crescentSpin 1s linear infinite;
+}
+
+/* ═══════════════════════════
+   BADGE / CHIP
+   ═══════════════════════════ */
+.islamic-badge {
+  background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.06));
+  border: 1px solid var(--border-gold-md);
+  color: var(--text-heading);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════
+   BUTTONS
+   ═══════════════════════════ */
+.btn-gold {
+  background: linear-gradient(135deg, #b8860b 0%, #d4af37 40%, #c9a227 100%);
+  color: #050c1a;
+  font-weight: 700;
+  border: 1px solid rgba(255, 220, 100, 0.3);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+}
+.btn-gold:hover { filter: brightness(1.12); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35); }
+
+.btn-teal {
+  background: linear-gradient(135deg, #0a7a74 0%, #0f9690 60%, #12b0aa 100%);
+  color: #f0e6d3;
+  font-weight: 700;
+  border: 1px solid rgba(20, 196, 187, 0.25);
+  box-shadow: 0 4px 15px rgba(15, 150, 144, 0.18);
+}
+.btn-teal:hover { filter: brightness(1.1); box-shadow: 0 6px 20px rgba(20, 196, 187, 0.28); }
+
+/* ═══════════════════════════
+   INPUTS
+   ═══════════════════════════ */
+.islamic-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-gold);
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.islamic-input:focus {
+  outline: none;
+  border-color: var(--border-gold-hi);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.10);
+}
+.islamic-input::placeholder { color: var(--text-subtle); }
+
+/* ═══════════════════════════
+   ARABIC TEXT BLOCK
+   ═══════════════════════════ */
+.arabic-block {
+  background: linear-gradient(135deg, var(--arabic-bg-1), var(--arabic-bg-2));
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 1.25rem;
+  position: relative;
+}
+.arabic-block::after {
+  content: '﷽';
+  position: absolute;
+  top: -10px; left: 50%; transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(212, 175, 55, 0.45);
+  background: var(--arabic-card-bg);
+  padding: 0 6px;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════
+   PLAYING CARD STATE
+   ═══════════════════════════ */
+.playing-card {
+  border-color: rgba(212, 175, 55, 0.55) !important;
+  background: var(--playing-bg) !important;
+  box-shadow:
+    0 0 0 2px rgba(212, 175, 55, 0.18),
+    0 16px 40px -10px rgba(0, 0, 0, 0.2),
+    0 0 30px -8px rgba(212, 175, 55, 0.15);
+}
+
+/* ═══════════════════════════
+   CATEGORY CHIPS
+   ═══════════════════════════ */
+.cat-chip {
+  background: var(--chip-bg);
+  border: 1px solid var(--border-gold);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+.cat-chip:hover {
+  border-color: var(--border-gold-md);
+  color: var(--text-heading);
+}
+.cat-chip.active {
+  background: rgba(212, 175, 55, 0.14);
+  border-color: var(--border-gold-md);
+  color: var(--text-heading);
+}
+
+/* ═══════════════════════════
+   TAB BAR
+   ═══════════════════════════ */
+.tab-active-teal {
+  background: linear-gradient(135deg, #0a7a74, #0f9690);
+  color: #f0e6d3;
+  box-shadow: 0 4px 12px rgba(15, 150, 144, 0.25);
+}
+.tab-active-gold {
+  background: linear-gradient(135deg, #b8860b, #d4af37);
+  color: #050c1a;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+}
+
+/* ═══════════════════════════
+   THEME TOGGLE BUTTON
+   ═══════════════════════════ */
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 999px;
+  border: 1px solid var(--border-gold-md);
+  background: var(--bg-input);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+.theme-toggle:hover {
+  border-color: var(--border-gold-hi);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+}
+/* The sliding pill */
+.theme-toggle-pill {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  transition: background 0.3s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  flex-shrink: 0;
+}
+[data-theme="dark"] .theme-toggle-pill  { background: rgba(212, 175, 55, 0.20); }
+[data-theme="light"] .theme-toggle-pill { background: rgba(180, 140, 30, 0.25); }
+
+.theme-toggle-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+/* ═══════════════════════════
+   MISC UTILITIES
+   ═══════════════════════════ */
+.pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem)); }
+.pt-safe { padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem)); }
+
+* { -webkit-tap-highlight-color: transparent; }
+
+.scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════
+   LIGHT THEME OVERRIDES
+   (elements that need explicit light values)
+   ═══════════════════════════ */
+[data-theme="light"] .glass-card:hover {
+  box-shadow:
+    0 12px 30px -8px rgba(120, 80, 0, 0.12),
+    0 0 20px -5px rgba(180, 140, 30, 0.10);
+}
+
+[data-theme="light"] .playing-card {
+  border-color: rgba(180, 140, 30, 0.60) !important;
+  box-shadow:
+    0 0 0 2px rgba(180, 140, 30, 0.15),
+    0 16px 40px -10px rgba(120, 80, 0, 0.15),
+    0 0 30px -8px rgba(180, 140, 30, 0.15);
+}
+
+[data-theme="light"] .crescent-spinner {
+  border-color: rgba(180, 140, 30, 0.20);
+  border-top-color: var(--gold-bright);
+  border-right-color: rgba(180, 140, 30, 0.5);
+}
+
+[data-theme="light"] .arabic-block::after {
+  background: var(--arabic-card-bg);
+  color: rgba(140, 100, 20, 0.55);
+}
+
+[data-theme="light"] .gold-pulse {
+  animation: goldPulseLight 2s ease-in-out infinite;
+}
+@keyframes goldPulseLight {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(180, 140, 30, 0.50); }
+  50%       { box-shadow: 0 0 0 8px rgba(180, 140, 30, 0.00); }
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track { background: var(--bg-navy); }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: var(--gold-base); }
