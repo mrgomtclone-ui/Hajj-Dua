@@ -10,11 +10,13 @@ export function getDeviceId(): string {
   return id;
 }
 
+export const API_BASE = (import.meta.env.VITE_API_URL ?? "").replace(/\/+$/, "");
+
 export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
   let res: Response;
   const deviceId = typeof window !== "undefined" ? getDeviceId() : "unknown";
   try {
-    res = await fetch(`/api${path}`, {
+    res = await fetch(`${API_BASE}/api${path}`, {
       ...init,
       credentials: "include",
       headers: {

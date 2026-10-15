@@ -1,6 +1,7 @@
 import { db, searchKey, type OfflineDua } from "../../db/indexedDb";
 import type { Lang, TrackRef } from "../../types";
 import type { UrlResolver } from "../audio/player";
+import { API_BASE } from "../api/client";
 export const hasAudio = async (id: string) => !!(await db.audio.get(id)); // never re-download a valid local copy
 export const saveDuaText = (d: Omit<OfflineDua, "savedAt" | "searchText">) =>
   db.duas.put({ ...d, savedAt: Date.now(), searchText: searchKey([d.title, d.arabicText, d.translations.en, d.translations.ta, d.translations.ur, d.reference, d.category].filter(Boolean).join(" ")) });
@@ -14,7 +15,7 @@ export async function downloadAudio(meta: { duaId: string; language: Lang; title
   if (quota && quota - used < 10_000_000) throw new Error("Not enough storage space. Remove some downloads and try again.");
   const ctl = new AbortController(); active.set(track.id, ctl);
   try {
-    const res = await fetch(`/api/audio/${track.id}/stream`, { signal: ctl.signal, credentials: "include" });
+    const res = await fetch(`${API_BASE}/api/audio/${track.id}/stream`, { signal: ctl.signal, credentials: "include" });
     if (!res.ok || !res.body) throw new Error(res.status === 404 ? "This audio is not available on the server yet." : "Download failed.");
     const total = +(res.headers.get("Content-Length") ?? 0), chunks: Uint8Array[] = [], reader = res.body.getReader(); let got = 0;
     for (;;) { const { done, value } = await reader.read(); if (done) break; chunks.push(value); got += value.length; if (total) onProgress?.(got / total); }
