@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 import { app } from "./app.js";
 import { env } from "./config/env.js";
+import { seedDatabase } from "./seed/seed.js";
 
 try {
   console.log("Connecting to MongoDB...");
   await mongoose.connect(env.MONGO_URI);
   console.log("MongoDB connected successfully");
+  await seedDatabase();
   app.listen(env.PORT, () => console.log(`Noor API running on :${env.PORT}`));
 } catch (err: any) {
   console.error("❌ Failed to connect to MongoDB:", err.message);

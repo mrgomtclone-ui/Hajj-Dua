@@ -4,11 +4,13 @@ import { Dua, AudioTrack, Playlist, Bookmark, SyncOp } from "../models/index.js"
 import { listQuery, playlistInput, syncBody } from "../validators/index.js";
 import { ok, wrap, owner, HttpError } from "../utils/http.js";
 import { env } from "../config/env.js";
+import { seedDatabase } from "../seed/seed.js";
 export const api = Router();
 const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const norm = (s: string) => s.normalize("NFKD").replace(/[\u064B-\u065F\u0670]/g, "");
 
 api.get("/health", (_q, r) => ok(r, { status: "up" }));
+api.get("/seed", wrap(async (_q, r) => ok(r, { seeded: await seedDatabase(true), message: "Database seeded successfully" })));
 api.get("/categories", wrap(async (_q, r) => ok(r, await Dua.aggregate([{ $group: { _id: "$category", count: { $sum: 1 } } }, { $sort: { _id: 1 } }]))));
 
 api.get("/duas", wrap(async (req, res) => {

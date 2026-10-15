@@ -33,6 +33,7 @@ import { api, SESSION_EXPIRED } from "../services/api/client";
 import { repo, sync, player } from "../main";
 import { db } from "../db/indexedDb";
 import type { Lang, PlayerState, Playlist } from "../types";
+import { FALLBACK_DUAS } from "../data/fallbackDuas";
 
 export type TranslationLang = "en" | "ta" | "ur";
 
@@ -59,8 +60,8 @@ export interface UserProfile {
 }
 
 export default function App() {
-  const [duas, setDuas] = useState<DuaItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [duas, setDuas] = useState<DuaItem[]>(FALLBACK_DUAS);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [activeTab, setActiveTab] = useState<"explore" | "bookmarks" | "playlists">("explore");
@@ -288,6 +289,8 @@ export default function App() {
         } catch (dbErr) {
           console.warn("Could not save to IndexedDB:", dbErr);
         }
+      } else {
+        setDuas((prev) => (prev.length > 0 ? prev : FALLBACK_DUAS));
       }
     } catch (e) {
       console.warn("Network unavailable, loading offline from IndexedDB:", e);
@@ -312,9 +315,12 @@ export default function App() {
           // Check cached audios in IndexedDB
           const audioRecords = await db.audio.toArray();
           setCachedAudioIds(new Set(audioRecords.map((a) => a.duaId)));
+        } else {
+          setDuas((prev) => (prev.length > 0 ? prev : FALLBACK_DUAS));
         }
       } catch (cacheErr) {
         console.error("Failed to read cached duas:", cacheErr);
+        setDuas((prev) => (prev.length > 0 ? prev : FALLBACK_DUAS));
       }
     } finally {
       setLoading(false);

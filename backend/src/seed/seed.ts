@@ -121,18 +121,6 @@ const rows = [
   },
 ];
 
-await mongoose.connect(env.MONGO_URI);
-await Dua.deleteMany({});
-for (const r of rows) {
-  await Dua.create({
-    ...r,
-    arabicNorm: norm(r.arabicText)
-  });
-}
-console.log("Seeded successfully:", rows.length, "ordered Hajj & Umrah duas");
-
-// Seed AudioTracks pointing to storage files
-await AudioTrack.deleteMany({});
 const tracks = [
   { slug: "hajj-leaving-home-part-1", storageKey: "Leaving Home-1.ogg", durationSec: 11, sizeBytes: 74332 },
   { slug: "hajj-leaving-home-part-2", storageKey: "Leaving Home-2.ogg", durationSec: 12, sizeBytes: 86296 },
@@ -140,20 +128,50 @@ const tracks = [
   { slug: "hajj-boarding-ship", storageKey: "BOARDING IN THE SHIP.ogg", durationSec: 26, sizeBytes: 176427 },
 ];
 
-for (const t of tracks) {
-  const duaDoc = await Dua.findOne({ slug: t.slug });
-  if (duaDoc) {
-    await AudioTrack.create({
-      dua: duaDoc._id,
-      language: "ar",
-      speaker: "Arabic Reciter",
-      durationSec: t.durationSec,
-      storageKey: t.storageKey,
-      mimeType: "audio/ogg",
-      sizeBytes: t.sizeBytes,
-      licence: "User Uploaded"
-    });
+export async function seedDatabase(force = false) {
+  const count = await Dua.countDocuments();
+  if (count > 0 && !force) {
+    console.log(`Database already has ${count} duas. Skipping auto-seed.`);
+    return count;
   }
+  console.log(force ? "Re-seeding database..." : "Database is empty. Auto-seeding initial duas...");
+  if (force) {
+    await Dua.deleteMany({});
+    await AudioTrack.deleteMany({});
+  }
+  for (const r of rows) {
+    await Dua.findOneAndUpdate(
+      { slug: r.slug },
+      { ...r, arabicNorm: norm(r.arabicText) },
+      { upsert: true, new: true }
+    );
+  }
+  for (const t of tracks) {
+    const duaDoc = await Dua.findOne({ slug: t.slug });
+    if (duaDoc) {
+      await AudioTrack.findOneAndUpdate(
+        { dua: duaDoc._id, language: "ar" },
+        {
+          dua: duaDoc._id,
+          language: "ar",
+          speaker: "Arabic Reciter",
+          durationSec: t.durationSec,
+          storageKey: t.storageKey,
+          mimeType: "audio/ogg",
+          sizeBytes: t.sizeBytes,
+          licence: "User Uploaded"
+        },
+        { upsert: true, new: true }
+      );
+    }
+  }
+  console.log(`Seeded successfully: ${rows.length} ordered Hajj & Umrah duas`);
+  return rows.length;
 }
-console.log("Seeded AudioTrack records for the first 4 duas");
-await mongoose.disconnect();
+
+// If run directly:
+if (process.argv[1] && (process.argv[1].replace(/\\/g, "/").includes("seed.ts") || process.argv[1].replace(/\\/g, "/").includes("seed.js"))) {
+  await mongoose.connect(env.MONGO_URI);
+  await seedDatabase(true);
+  await mongoose.disconnect();
+}
