@@ -1,6 +1,6 @@
 import Dexie, { type Table } from "dexie";
 import type { Lang, Playlist, SyncOp } from "../types";
-export interface OfflineDua { id: string; title: string; category: string; arabicText: string; transliteration?: string; translations: { en?: string; ta?: string; ur?: string }; reference?: string; kind: string; verified: boolean; savedAt: number; searchText: string; audioUrl?: string }
+export interface OfflineDua { id: string; title: string; titles?: { en?: string; ta?: string; ur?: string }; category: string; arabicText: string; transliteration?: string; transliterations?: { en?: string; ta?: string; ur?: string }; translations: { en?: string; ta?: string; ur?: string }; reference?: string; source?: string; kind: string; verified: boolean; savedAt: number; searchText: string; audioUrl?: string }
 export interface OfflineAudio { id: string; duaId: string; language: Lang; title: string; speaker?: string; duration: number; audioBlob: Blob; downloadedAt: number; sizeBytes?: number; checksum?: string }
 class NoorDB extends Dexie {
   duas!: Table<OfflineDua, string>; audio!: Table<OfflineAudio, string>;

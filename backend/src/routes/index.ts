@@ -17,7 +17,7 @@ api.get("/duas", wrap(async (req, res) => {
   const { q, category, lang, page, limit } = listQuery.parse(req.query);
   const f: Record<string, unknown> = {};
   if (category) f.category = category;
-  if (q) { const rx = new RegExp(esc(q), "i"); f.$or = [{ title: rx }, { "translations.en": rx }, { "translations.ta": rx }, { "translations.ur": rx }, { reference: rx }, { arabicNorm: new RegExp(esc(norm(q))) }]; }
+  if (q) { const rx = new RegExp(esc(q), "i"); f.$or = [{ title: rx }, { "translations.en": rx }, { "translations.ta": rx }, { "translations.ur": rx }, { transliteration: rx }, { "transliterations.ta": rx }, { reference: rx }, { arabicNorm: new RegExp(esc(norm(q))) }]; }
   if (lang) f._id = { $in: await AudioTrack.distinct("dua", { language: lang }) };
   const [items, total] = await Promise.all([Dua.find(f).sort({ order: 1, createdAt: 1 }).skip((page - 1) * limit).limit(limit).lean(), Dua.countDocuments(f)]);
   ok(res, items, { page, limit, total });

@@ -11,10 +11,14 @@ const duaSchema = new Schema({
   arabicText: { type: String, required: true },
   arabicNorm: { type: String, index: true }, // diacritics-stripped, for search
   transliteration: String,
+  transliterations: { en: String, ta: String, ur: String },
   translations: { en: String, ta: String, ur: String },
   source: String, reference: String, grading: String, repetitions: Number,
   order: { type: Number, default: 0 },
   audioUrl: String,
+  audioEnglishUrl: String,
+  audioTamilUrl: String,
+  audioUrduUrl: String,
   verified: { type: Boolean, default: false }, // false => UI shows a "demo" label
 }, opts);
 duaSchema.index({ title: "text", "translations.en": "text", reference: "text" });

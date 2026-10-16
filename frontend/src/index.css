@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Scheherazade+New:wght@400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -79,6 +79,14 @@
   --hero-btn-font-bg:  rgba(10, 25, 62, 0.85);
   --hero-btn-font-border: rgba(212, 175, 55, 0.28);
   --hero-btn-font-text: #f0e6d3;
+
+  /* Events Section Cards (Dark) - Matches Website Deep Midnight Navy & Gold */
+  --event-card-bg:     rgba(11, 24, 61, 0.72);
+  --event-card-hover:  rgba(16, 31, 78, 0.90);
+  --event-circle-bg:   rgba(14, 28, 68, 0.85);
+  --event-border:      rgba(212, 175, 55, 0.28);
+  --event-text:        #f0d060;
+  --event-text-sub:    #8b9ec7;
 }
 
 /* ── LIGHT THEME ── */
@@ -137,6 +145,18 @@
   --hero-btn-font-bg:  rgba(255, 252, 242, 0.95);
   --hero-btn-font-border: rgba(180, 140, 30, 0.38);
   --hero-btn-font-text: #4e3505;
+
+  /* Events Section Cards (Light) - Matches Website Luminous Sand & Gold */
+  --event-card-bg:     rgba(255, 252, 245, 0.92);
+  --event-card-hover:  rgba(255, 249, 235, 0.98);
+  --event-circle-bg:   rgba(240, 225, 185, 0.60);
+  --event-border:      rgba(180, 140, 30, 0.30);
+  --event-text:        #4e3505;
+  --event-text-sub:    #6b5220;
+}
+
+.font-urdu {
+  font-family: 'Noto Nastaliq Urdu', 'Scheherazade New', 'Amiri', serif;
 }
 
 /* ── Hero Banner Utility ── */
@@ -349,12 +369,10 @@ body {
    PLAYING CARD STATE
    ═══════════════════════════ */
 .playing-card {
-  border-color: rgba(212, 175, 55, 0.55) !important;
-  background: var(--playing-bg) !important;
+  border-color: var(--gold-bright) !important;
   box-shadow:
-    0 0 0 2px rgba(212, 175, 55, 0.18),
-    0 16px 40px -10px rgba(0, 0, 0, 0.2),
-    0 0 30px -8px rgba(212, 175, 55, 0.15);
+    0 0 0 2px rgba(212, 175, 55, 0.45),
+    0 12px 32px -8px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* ═══════════════════════════
@@ -452,11 +470,10 @@ body {
 }
 
 [data-theme="light"] .playing-card {
-  border-color: rgba(180, 140, 30, 0.60) !important;
+  border-color: var(--gold-bright) !important;
   box-shadow:
-    0 0 0 2px rgba(180, 140, 30, 0.15),
-    0 16px 40px -10px rgba(120, 80, 0, 0.15),
-    0 0 30px -8px rgba(180, 140, 30, 0.15);
+    0 0 0 2px rgba(180, 140, 30, 0.45),
+    0 10px 25px -6px rgba(120, 80, 0, 0.12) !important;
 }
 
 [data-theme="light"] .crescent-spinner {
