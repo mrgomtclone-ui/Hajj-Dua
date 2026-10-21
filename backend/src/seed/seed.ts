@@ -31,6 +31,9 @@ const rows = [
     audioEnglishUrl: "/Duas/Leaving Home-1-en.mp3",
     audioTamilUrl: "/Duas/Leaving Home-1-ta.mp3",
     audioUrduUrl: "/Duas/Leaving Home-1-ur.mp3",
+    audioTitleEnglishUrl: "/Duas/Leaving Home-1-title-en.mp3",
+    audioTitleTamilUrl: "/Duas/Leaving Home-1-title-ta.mp3",
+    audioTitleUrduUrl: "/Duas/Leaving Home-1-title-ur.mp3",
     source: "Sunan Abi Dawud & Jami at-Tirmidhi",
     reference: "Abu Dawud 5095, Tirmidhi 3426",
     verified: true
@@ -61,6 +64,9 @@ const rows = [
     audioEnglishUrl: "/Duas/Leaving Home-2-en.mp3",
     audioTamilUrl: "/Duas/Leaving Home-2-ta.mp3",
     audioUrduUrl: "/Duas/Leaving Home-2-ur.mp3",
+    audioTitleEnglishUrl: "/Duas/Leaving Home-2-title-en.mp3",
+    audioTitleTamilUrl: "/Duas/Leaving Home-2-title-ta.mp3",
+    audioTitleUrduUrl: "/Duas/Leaving Home-2-title-ur.mp3",
     source: "Sunan Abi Dawud & Jami at-Tirmidhi",
     reference: "Abu Dawud 5094, Tirmidhi 3427",
     verified: true
@@ -91,6 +97,9 @@ const rows = [
     audioEnglishUrl: "/Duas/Send of others-en.mp3",
     audioTamilUrl: "/Duas/Send of others-ta.mp3",
     audioUrduUrl: "/Duas/Send of others-ur.mp3",
+    audioTitleEnglishUrl: "/Duas/Send of others-title-en.mp3",
+    audioTitleTamilUrl: "/Duas/Send of others-title-ta.mp3",
+    audioTitleUrduUrl: "/Duas/Send of others-title-ur.mp3",
     source: "Sunan Abi Dawud & Jami at-Tirmidhi",
     reference: "Abu Dawud 2600, Tirmidhi 3442 & 3444",
     verified: true
@@ -121,6 +130,9 @@ const rows = [
     audioEnglishUrl: "/Duas/BOARDING IN THE SHIP-en.mp3",
     audioTamilUrl: "/Duas/BOARDING IN THE SHIP-ta.mp3",
     audioUrduUrl: "/Duas/BOARDING IN THE SHIP-ur.mp3",
+    audioTitleEnglishUrl: "/Duas/BOARDING IN THE SHIP-title-en.mp3",
+    audioTitleTamilUrl: "/Duas/BOARDING IN THE SHIP-title-ta.mp3",
+    audioTitleUrduUrl: "/Duas/BOARDING IN THE SHIP-title-ur.mp3",
     source: "Quran",
     reference: "Surah Hud 11:41 & Surah Az-Zumar 39:67",
     verified: true
@@ -150,6 +162,9 @@ const rows = [
     audioEnglishUrl: "/Duas/Travel aeroplane-en.mp3",
     audioTamilUrl: "/Duas/Travel aeroplane-ta.mp3",
     audioUrduUrl: "/Duas/Travel aeroplane-ur.mp3",
+    audioTitleEnglishUrl: "/Duas/Travel aeroplane-title-en.mp3",
+    audioTitleTamilUrl: "/Duas/Travel aeroplane-title-ta.mp3",
+    audioTitleUrduUrl: "/Duas/Travel aeroplane-title-ur.mp3",
     source: "Sahih Muslim & Sunan Abi Dawud",
     reference: "Sahih Muslim 1342 • Surah Az-Zukhruf 43:13-14",
     verified: true

@@ -92,7 +92,7 @@ export const PlaylistsPage: React.FC<PlaylistsPageProps> = ({
           </button>
 
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <span className="text-xs sm:text-sm font-bold truncate" style={{ color: "var(--text-heading)" }}>
+            <span className="text-sm sm:text-base font-extrabold truncate" style={{ color: "var(--text-heading)", fontWeight: 800 }}>
               {activePlaylist ? activePlaylist.title : "My Playlists"}
             </span>
             <span
@@ -107,7 +107,7 @@ export const PlaylistsPage: React.FC<PlaylistsPageProps> = ({
 
       {/* Navigation Tabs (Explore / Bookmarks / Playlists) */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 mt-3 sm:mt-6">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[rgba(212,175,55,0.15)] pb-2 sm:pb-3 overflow-x-auto scrollbar-none">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-gold)] pb-2 sm:pb-3 overflow-x-auto scrollbar-none">
           <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap py-0.5">
             <button
               onClick={onNavigateToDuas}

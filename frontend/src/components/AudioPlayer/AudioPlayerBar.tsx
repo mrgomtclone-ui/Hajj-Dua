@@ -20,7 +20,7 @@ export interface AudioPlayerBarProps {
   audioDuration: number;
   audioCurrentTime: number;
   audioProgress: number;
-  audioPhase?: "idle" | "arabic" | "meaning";
+  audioPhase?: "idle" | "heading" | "arabic" | "meaning";
   isDownloaded?: boolean;
   isDownloading?: boolean;
   onSeek: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -69,12 +69,12 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <div
               className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center flex-shrink-0"
               style={{
-                background: "rgba(212,175,55,0.14)",
+                background: "rgba(16,185,129,0.12)",
                 border: "1px solid var(--border-gold)",
                 color: "var(--gold-bright)"
               }}
             >
-              <Volume2 className={`w-4 h-4 sm:w-5 sm:h-5 ${isPlaying ? "animate-pulse text-[#fde68a]" : ""}`} />
+              <Volume2 className={`w-4 h-4 sm:w-5 sm:h-5 ${isPlaying ? "animate-pulse text-emerald-400" : ""}`} />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 sm:gap-2">
@@ -82,8 +82,15 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                   {currentDua.titles?.[selectedLang] || currentDua.title}
                 </span>
 
-                {/* Audio Phase Indicator Badge (Arabic Recitation -> Meaning) */}
-                {audioPhase === "arabic" ? (
+                {/* Audio Phase Indicator Badge (Heading -> Arabic Recitation -> Meaning) */}
+                {audioPhase === "heading" ? (
+                  <span
+                    className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 flex-shrink-0 animate-pulse"
+                    style={{ background: "rgba(56,189,248,0.22)", color: "#38bdf8", border: "1px solid rgba(56,189,248,0.4)" }}
+                  >
+                    <span>📢 {selectedLang === "ta" ? "தலைப்பு" : selectedLang === "ur" ? "عنوان" : "Title / Heading"}</span>
+                  </span>
+                ) : audioPhase === "arabic" ? (
                   <span
                     className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 flex-shrink-0 animate-pulse"
                     style={{ background: "rgba(16,185,129,0.22)", color: "#34d399", border: "1px solid rgba(16,185,129,0.4)" }}
@@ -93,7 +100,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                 ) : audioPhase === "meaning" ? (
                   <span
                     className="text-[9px] sm:text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 flex-shrink-0 animate-pulse"
-                    style={{ background: "rgba(245,158,11,0.22)", color: "#fbbf24", border: "1px solid rgba(245,158,11,0.4)" }}
+                    style={{ background: "rgba(16,185,129,0.22)", color: "#10b981", border: "1px solid rgba(16,185,129,0.4)" }}
                   >
                     <span>🎙️ {selectedLang === "ta" ? "தமிழ் விளக்கம்" : selectedLang === "ur" ? "اردو ترجمہ" : "English Meaning"}</span>
                   </span>
@@ -131,8 +138,8 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           </button>
         </div>
 
-        {/* Scrubber Progress Bar for Real Audio */}
-        {currentDua.audioUrl && (
+        {/* Scrubber Progress Bar for Audio */}
+        {(currentDua.audioUrl || currentDua.audioTitleEnglishUrl || currentDua.audioEnglishUrl) && (
           <div className="w-full md:flex-1 md:max-w-md flex items-center gap-2 sm:gap-3">
             <span className="text-[10px] sm:text-[11px] font-mono w-8 sm:w-10 text-right" style={{ color: "var(--text-muted)" }}>
               {formatTime(audioCurrentTime)}
@@ -143,7 +150,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               max="100"
               value={audioProgress}
               onChange={onSeek}
-              className="flex-1 h-2 rounded-lg appearance-none cursor-pointer accent-[#d4af37]"
+              className="flex-1 h-2 rounded-lg appearance-none cursor-pointer accent-[#059669]"
               style={{ background: "var(--bg-input)", border: "1px solid var(--border-gold)" }}
             />
             <span className="text-[10px] sm:text-[11px] font-mono w-8 sm:w-10" style={{ color: "var(--text-muted)" }}>
@@ -162,7 +169,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                 isDownloaded
                   ? "bg-[#10b981]/20 border-[#10b981] text-[#10b981]"
                   : isDownloading
-                  ? "border-amber-400 text-amber-400"
+                  ? "border-emerald-500 text-emerald-500"
                   : "border-[var(--border-gold)] text-[var(--text-muted)] hover:text-[#10b981] hover:border-[#10b981]"
               }`}
               style={!isDownloaded && !isDownloading ? { background: "var(--bg-input)" } : undefined}
@@ -197,8 +204,8 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
 
           <button
             onClick={() => onTogglePlay(currentDua)}
-            className="w-11 h-11 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition active:scale-95 gold-pulse text-slate-900 font-bold"
-            style={{ background: "linear-gradient(135deg, #b8860b, #d4af37)" }}
+            className="w-11 h-11 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg transition active:scale-95 text-white font-bold"
+            style={{ background: "linear-gradient(135deg, #059669, #047857)" }}
           >
             {isPlaying ? (
               <Pause className="w-5 h-5 fill-current" />

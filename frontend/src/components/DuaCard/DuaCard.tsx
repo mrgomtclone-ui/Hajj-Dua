@@ -103,7 +103,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
               <span
                 className="text-[11px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1"
                 style={{
-                  background: "rgba(212,175,55,0.14)",
+                  background: "rgba(16,185,129,0.12)",
                   border: "1px solid var(--border-gold)",
                   color: "var(--gold-bright)"
                 }}
@@ -173,7 +173,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
                   isDownloaded
                     ? "bg-[#10b981] text-slate-950 font-bold"
                     : isDownloading
-                    ? "border border-amber-400 text-amber-400"
+                    ? "border border-emerald-500 text-emerald-500"
                     : "border hover:border-[#10b981] hover:text-[#10b981]"
                 }`}
                 style={
@@ -211,7 +211,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
               }}
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition active:scale-90 shadow-sm"
               style={{
-                background: isBookmarked ? "rgba(212,175,55,0.18)" : "var(--bg-input)",
+                background: isBookmarked ? "rgba(16,185,129,0.18)" : "var(--bg-input)",
                 border: isBookmarked ? "1px solid var(--border-gold-md)" : "1px solid var(--border-gold)",
                 color: isBookmarked ? "var(--gold-bright)" : "var(--text-muted)"
               }}
@@ -224,57 +224,62 @@ export const DuaCard: React.FC<DuaCardProps> = ({
 
         {/* Dua Title */}
         <h3
-          className="mt-3 text-xl sm:text-2xl font-bold transition-colors leading-snug"
+          className="mt-3 text-xl sm:text-2xl font-extrabold transition-colors leading-snug tracking-tight"
           style={{
-            color: "var(--text-heading)"
+            color: "var(--text-heading)",
+            fontWeight: 800
           }}
         >
           {displayTitle}
         </h3>
 
-        {/* Arabic Text (The Star of the Card) */}
+        {/* Arabic Text (The Star of the Card - Bold & Extra Clear in Sunlight) */}
         <div className="arabic-block mt-4 transition-all">
           <p
             dir="rtl"
-            className={`font-arabic leading-relaxed text-right tracking-wide transition-all ${
-              fontSizeLarge ? "text-3xl leading-[2.2]" : "text-2xl leading-[2.0]"
+            className={`font-arabic font-bold text-right transition-all ${
+              fontSizeLarge ? "text-3xl sm:text-4xl" : "text-2xl sm:text-3xl"
             }`}
             style={{
               fontFamily: "'Amiri', 'Scheherazade New', serif",
-              color: "var(--text-primary)"
+              color: "var(--text-primary)",
+              fontWeight: 700,
+              lineHeight: fontSizeLarge ? 3.0 : 2.7,
+              wordSpacing: "0.15em",
+              paddingTop: "0.5rem",
+              paddingBottom: "0.5rem"
             }}
           >
             {dua.arabicText}
           </p>
         </div>
 
-        {/* Transliteration (shows Tamil when TA is selected, English when EN is selected) */}
+        {/* Transliteration (shows Tamil when TA is selected, English when EN is selected - Bold) */}
         {transliterationText && (
           <p
-            className="mt-4 text-base sm:text-lg italic font-sans leading-relaxed whitespace-pre-line tracking-wide"
+            className="mt-4 text-base sm:text-lg italic font-sans font-bold leading-relaxed whitespace-pre-line tracking-wide"
             style={{
-              color: "var(--teal-bright)",
-              fontWeight: 600,
-              textShadow: "0 0 20px rgba(20,196,187,0.3)"
+              color: "var(--translit-color, var(--teal-bright))",
+              fontWeight: 700
             }}
           >
             "{transliterationText}"
           </p>
         )}
 
-        {/* Translation */}
+        {/* Translation (Semibold/Bold for high outdoor clarity) */}
         <div
-          className="mt-3 text-base sm:text-lg font-sans leading-[1.8] whitespace-pre-line space-y-1.5"
-          style={{ color: "var(--text-primary)", fontWeight: 400 }}
+          className="mt-3 text-base sm:text-lg font-sans font-semibold leading-[1.8] whitespace-pre-line space-y-1.5"
+          style={{ color: "var(--text-primary)", fontWeight: 600 }}
         >
           {translationText}
         </div>
 
         {/* Reference & Source */}
         {(dua.reference || dua.source) && (
-          <div className="mt-4 flex items-start gap-2 text-sm sm:text-base" style={{ color: "var(--text-muted)" }}>
-            <Info className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "var(--gold-bright)" }} />
-            <span className="font-semibold leading-snug" style={{ color: "var(--gold-light)" }}>
+          <div className="mt-4 flex items-start gap-2 text-sm sm:text-base font-bold" style={{ color: "var(--text-muted)" }}>
+            <Info className="w-4 h-4 flex-shrink-0 mt-0.5 stroke-[2.5]" style={{ color: "var(--gold-bright)" }} />
+            <span className="font-extrabold leading-snug" style={{ color: "var(--gold-light)", fontWeight: 700 }}>
               {dua.source ? `${dua.source} • ` : ""}
               {dua.reference}
             </span>
@@ -285,7 +290,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
       {/* Actions Toolbar */}
       <div
         className="mt-5 pt-4 flex items-center justify-between gap-2"
-        style={{ borderTop: "1px solid rgba(212,175,55,0.12)" }}
+        style={{ borderTop: "1px solid var(--border-gold)" }}
       >
         {/* Play / Recite Button */}
         <button

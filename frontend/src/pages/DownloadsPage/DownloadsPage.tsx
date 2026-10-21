@@ -111,12 +111,7 @@ export const DownloadsPage: React.FC<DownloadsPageProps> = ({
               <button
                 onClick={onDownloadAll}
                 disabled={downloadingIds.size > 0}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-bold shadow-md transition active:scale-95 disabled:opacity-50 flex-shrink-0"
-                style={{
-                  background: "linear-gradient(135deg, #b8860b, #d4af37)",
-                  color: "#1f1500",
-                  border: "1px solid var(--border-gold-hi)"
-                }}
+                className="btn-gold inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-bold shadow-md transition active:scale-95 disabled:opacity-50 flex-shrink-0"
                 title="Download all available duas for offline listening"
               >
                 {downloadingIds.size > 0 ? (
@@ -182,12 +177,7 @@ export const DownloadsPage: React.FC<DownloadsPageProps> = ({
             </p>
             <button
               onClick={onDownloadAll}
-              className="mt-4 px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-md active:scale-95"
-              style={{
-                background: "linear-gradient(135deg, #b8860b, #d4af37)",
-                color: "#1f1500",
-                border: "1px solid var(--border-gold-hi)"
-              }}
+              className="btn-gold mt-4 px-5 py-2.5 rounded-xl text-xs font-bold transition shadow-md active:scale-95"
             >
               Download All for Offline
             </button>

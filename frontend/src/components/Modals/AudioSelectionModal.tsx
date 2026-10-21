@@ -216,7 +216,7 @@ export const AudioSelectionModal: React.FC<AudioSelectionModalProps> = ({
             </div>
           </div>
 
-          {/* Option 2: [Language] Translation */}
+          {/* Option 2: [Language] Translation & Meaning */}
           <div
             onClick={toggleTranslation}
             className="p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 group active:scale-[0.99]"
@@ -232,10 +232,10 @@ export const AudioSelectionModal: React.FC<AudioSelectionModalProps> = ({
                   color: tempConfig.playTranslation ? "var(--gold-light)" : "var(--text-primary)"
                 }}
               >
-                {getLangLabel(selectedLang)} Translation
+                {getLangLabel(selectedLang)} Translation & Meaning
               </div>
               <div className="text-[11px] font-medium mt-0.5" style={{ color: "var(--text-muted)" }}>
-                {selectedLang === "ur" ? "اردو ترجمہ" : selectedLang === "ta" ? "தமிழ் விளக்கம்" : "English Meaning Voice"}
+                Plays heading & meaning • {selectedLang === "ur" ? "اردو ترجمہ (سلمان)" : selectedLang === "ta" ? "தமிழ் விளக்கம் (வள்ளுவர்)" : "English (Guy)"}
               </div>
 
               {/* Language Pills */}
@@ -250,7 +250,7 @@ export const AudioSelectionModal: React.FC<AudioSelectionModalProps> = ({
                     onClick={() => onSelectLang(l)}
                     className={`px-2 py-0.5 rounded-lg text-[10px] font-extrabold uppercase transition ${
                       selectedLang === l
-                        ? "bg-gradient-to-r from-[#d4af37] to-[#aa8010] text-slate-950 shadow-sm"
+                        ? "bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-sm"
                         : "border hover:opacity-100"
                     }`}
                     style={
@@ -336,10 +336,10 @@ export const AudioSelectionModal: React.FC<AudioSelectionModalProps> = ({
             {tempConfig.onlyRead
               ? "📖 Silent reading"
               : tempConfig.playArabic && tempConfig.playTranslation
-              ? "🕌 Recitation ➜ 🎙️ Meaning"
+              ? "📢 Heading ➜ 🕌 Recitation ➜ 🎙️ Meaning"
               : tempConfig.playArabic
               ? "🕌 Recitation only"
-              : "🎙️ Meaning only"}
+              : "📢 Heading ➜ 🎙️ Meaning"}
           </div>
 
           <button

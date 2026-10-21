@@ -83,7 +83,7 @@ export const DuasPage: React.FC<DuasPageProps> = ({
           </button>
 
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <span className="text-xs sm:text-sm font-bold truncate" style={{ color: "var(--text-heading)" }}>
+            <span className="text-sm sm:text-base font-extrabold truncate" style={{ color: "var(--text-heading)", fontWeight: 800 }}>
               {selectedCategory !== "All" ? `${selectedCategory} Duas` : "All Sacred Duas"}
             </span>
             <span
@@ -98,10 +98,10 @@ export const DuasPage: React.FC<DuasPageProps> = ({
 
       {/* Navigation Tabs (Explore / Bookmarks / Playlists) */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 mt-3 sm:mt-6">
-        <div className="flex items-center justify-between gap-2 border-b border-[rgba(212,175,55,0.15)] pb-2 sm:pb-3 overflow-x-auto scrollbar-none">
+        <div className="flex items-center justify-between gap-2 border-b border-[var(--border-gold)] pb-2 sm:pb-3 overflow-x-auto scrollbar-none">
           <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap py-0.5">
             <button
-              className="tab-active-gold flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shadow-md transition flex-shrink-0"
+              className="tab-active-gold flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-extrabold whitespace-nowrap shadow-md transition flex-shrink-0"
             >
               <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>All Duas</span>
@@ -144,7 +144,7 @@ export const DuasPage: React.FC<DuasPageProps> = ({
               <button
                 key={cat}
                 onClick={() => onSelectCategory(cat)}
-                className={`cat-chip ${isSelected ? "active" : ""} px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all`}
+                className={`cat-chip ${isSelected ? "active" : ""} px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all`}
               >
                 {cat}
               </button>

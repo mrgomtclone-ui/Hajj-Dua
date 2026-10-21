@@ -15,6 +15,7 @@ export type SyncOp =
 export type TranslationLang = "en" | "ta" | "ur";
 
 export interface AudioSelectionConfig {
+  playHeading?: boolean;
   playArabic: boolean;
   playTranslation: boolean;
   onlyRead: boolean;
@@ -44,6 +45,9 @@ export interface DuaItem {
   audioEnglishUrl?: string;
   audioTamilUrl?: string;
   audioUrduUrl?: string;
+  audioTitleEnglishUrl?: string;
+  audioTitleTamilUrl?: string;
+  audioTitleUrduUrl?: string;
 }
 
 export interface UserProfile {

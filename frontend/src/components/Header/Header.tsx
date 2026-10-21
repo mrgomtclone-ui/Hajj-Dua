@@ -54,7 +54,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAudioSelection
 }) => {
   return (
-    <header className="sticky top-0 z-40 glass-panel border-b border-[rgba(212,175,55,0.22)] px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 transition-all duration-300">
+    <header className="sticky top-0 z-40 glass-panel border-b border-[var(--border-gold)] px-3 sm:px-4 lg:px-8 py-2.5 sm:py-3 transition-all duration-300">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-1.5 sm:gap-4">
         {/* Logo & Identity */}
         <div
@@ -62,8 +62,8 @@ export const Header: React.FC<HeaderProps> = ({
           onClick={onNavigateHome}
           title="Return to Home"
         >
-          <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#c9a227] to-[#7a5c0a] flex items-center justify-center shadow-md border border-[rgba(212,175,55,0.35)] flex-shrink-0">
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#fde68a]" />
+          <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-800 flex items-center justify-center shadow-md border border-emerald-400/30 flex-shrink-0">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-100" />
             <span
               className="sm:hidden absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-[var(--bg-base)]"
               style={{ background: isOnline ? "var(--teal-bright)" : "var(--gold-bright)" }}
@@ -81,7 +81,7 @@ export const Header: React.FC<HeaderProps> = ({
               <span
                 className="hidden md:inline-block text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full font-medium font-arabic flex-shrink-0"
                 style={{
-                  background: "rgba(212,175,55,0.12)",
+                  background: "rgba(16,185,129,0.12)",
                   color: "var(--text-heading)",
                   border: "1px solid var(--border-gold-md)"
                 }}
@@ -174,12 +174,12 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Theme Toggle Button */}
           <button
             onClick={onToggleTheme}
-            title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            title={isDark ? "Switch to Sunlight Clear Mode (Outdoor High Contrast)" : "Switch to Night Mode"}
             className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex items-center justify-center transition active:scale-95 flex-shrink-0"
             style={{ background: "var(--bg-input)", borderColor: "var(--border-gold)" }}
             aria-label="Toggle theme"
           >
-            {isDark ? <Moon className="w-4 h-4 text-[#d4af37]" /> : <Sun className="w-4 h-4 text-[#8a5e00]" />}
+            {isDark ? <Moon className="w-4 h-4 text-emerald-400" /> : <Sun className="w-4 h-4 text-emerald-700" />}
           </button>
 
           {/* Sync Button (Hidden on small mobile screens to keep header clean) */}

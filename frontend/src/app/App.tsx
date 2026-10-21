@@ -114,15 +114,24 @@ export default function App() {
   const [activeEventInfo, setActiveEventInfo] = useState<EventInfo | null>(null);
   const [showAudioSelectionModal, setShowAudioSelectionModal] = useState(false);
 
-  // Audio Selection Config (Arabic Recitation, Translation Meaning, Only Read)
+  // Audio Selection Config (Heading, Arabic Recitation, Translation Meaning, Only Read)
   const [audioConfig, setAudioConfig] = useState<AudioSelectionConfig>(() => {
     try {
       const saved = localStorage.getItem("haj_audio_selection_config");
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          playHeading: parsed.playHeading !== undefined ? parsed.playHeading : true,
+          playArabic: parsed.playArabic !== undefined ? parsed.playArabic : true,
+          playTranslation: parsed.playTranslation !== undefined ? parsed.playTranslation : true,
+          onlyRead: !!parsed.onlyRead
+        };
+      }
     } catch (e) {
       console.warn("Failed to read audio config from storage:", e);
     }
     return {
+      playHeading: true,
       playArabic: true,
       playTranslation: true,
       onlyRead: false
@@ -155,9 +164,9 @@ export default function App() {
   // Interaction feedback
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  // Playback Phase State (Arabic Recitation -> Translation Meaning)
-  const [audioPhase, setAudioPhase] = useState<"idle" | "arabic" | "meaning">("idle");
-  const audioPhaseRef = useRef<"idle" | "arabic" | "meaning">("idle");
+  // Playback Phase State (Heading -> Arabic Recitation -> Translation Meaning)
+  const [audioPhase, setAudioPhase] = useState<"idle" | "heading" | "arabic" | "meaning">("idle");
+  const audioPhaseRef = useRef<"idle" | "heading" | "arabic" | "meaning">("idle");
   const currentDuaRef = useRef<DuaItem | null>(null);
   const selectedLangRef = useRef<TranslationLang>(selectedLang);
 
@@ -169,7 +178,7 @@ export default function App() {
     currentDuaRef.current = currentDua;
   }, [currentDua]);
 
-  const updateAudioPhase = (phase: "idle" | "arabic" | "meaning") => {
+  const updateAudioPhase = (phase: "idle" | "heading" | "arabic" | "meaning") => {
     audioPhaseRef.current = phase;
     setAudioPhase(phase);
   };
@@ -202,20 +211,44 @@ export default function App() {
     };
   }, []);
 
-  // Fetch Duas & Cache in IndexedDB
+  // Fetch Duas & Cache in IndexedDB (enriching with fallback title audio tracks)
   useEffect(() => {
     async function loadDuas() {
       try {
         const cached = await db.duas.toArray();
         if (cached && cached.length > 0) {
-          setDuas(cached as unknown as DuaItem[]);
+          const enrichedCached = (cached as unknown as DuaItem[]).map((d) => {
+            const fb = FALLBACK_DUAS.find((f) => f.slug === d.slug || f.title === d.title || f._id === d._id);
+            return fb
+              ? {
+                  ...fb,
+                  ...d,
+                  audioTitleEnglishUrl: d.audioTitleEnglishUrl || fb.audioTitleEnglishUrl,
+                  audioTitleTamilUrl: d.audioTitleTamilUrl || fb.audioTitleTamilUrl,
+                  audioTitleUrduUrl: d.audioTitleUrduUrl || fb.audioTitleUrduUrl
+                }
+              : d;
+          });
+          setDuas(enrichedCached);
         }
 
         const res = await api<any>("/duas?limit=50");
         const items: DuaItem[] = Array.isArray(res) ? res : res?.items || [];
         if (items && items.length > 0) {
-          setDuas(items);
-          await db.duas.bulkPut(items as any);
+          const enriched = items.map((d) => {
+            const fb = FALLBACK_DUAS.find((f) => f.slug === d.slug || f.title === d.title || f._id === d._id);
+            return fb
+              ? {
+                  ...fb,
+                  ...d,
+                  audioTitleEnglishUrl: d.audioTitleEnglishUrl || fb.audioTitleEnglishUrl,
+                  audioTitleTamilUrl: d.audioTitleTamilUrl || fb.audioTitleTamilUrl,
+                  audioTitleUrduUrl: d.audioTitleUrduUrl || fb.audioTitleUrduUrl
+                }
+              : d;
+          });
+          setDuas(enriched);
+          await db.duas.bulkPut(enriched as any);
         }
       } catch {
         // Network unavailable: fallback data in place
@@ -290,33 +323,25 @@ export default function App() {
       const lang = selectedLangRef.current;
       const config = audioConfigRef.current;
 
-      // When Arabic audio finishes, automatically transition to the selected language meaning if enabled!
-      if (currentPhase === "arabic" && dua && config.playTranslation) {
-        const meaningUrl =
-          lang === "en" ? dua.audioEnglishUrl :
-          lang === "ta" ? dua.audioTamilUrl :
-          lang === "ur" ? dua.audioUrduUrl :
-          undefined;
-
-        if (meaningUrl) {
-          updateAudioPhase("meaning");
-          audio.src = meaningUrl;
-          audio.currentTime = 0;
-          audio
-            .play()
-            .then(() => {
-              setPlayingAudioId(dua._id);
-            })
-            .catch((err) => {
-              console.warn("Meaning audio play failed:", err);
-              updateAudioPhase("idle");
-              setPlayingAudioId(null);
-            });
-          return; // Continue playing the meaning track!
-        }
+      if (!dua) {
+        updateAudioPhase("idle");
+        setPlayingAudioId(null);
+        return;
       }
 
-      // If meaning finished, or no translation audio exists, or translation disabled:
+      // 1. Heading just finished -> Transition to Arabic Recitation (if enabled) or Meaning
+      if (currentPhase === "heading") {
+        playNextAfterHeading(dua, audio, config, lang);
+        return;
+      }
+
+      // 2. Arabic Recitation just finished -> Transition to Meaning (if enabled)
+      if (currentPhase === "arabic") {
+        playNextAfterArabic(dua, audio, config, lang);
+        return;
+      }
+
+      // 3. Meaning just finished -> Sequence complete!
       updateAudioPhase("idle");
       setPlayingAudioId(null);
       setAudioProgress(0);
@@ -345,7 +370,82 @@ export default function App() {
     };
   }, []);
 
-  // Audio Controller (Plays Arabic first -> then Meaning for selected language!)
+  function getHeadingTrackUrl(dua: DuaItem, lang: TranslationLang): string | undefined {
+    let url: string | undefined;
+    if (lang === "ta") url = dua.audioTitleTamilUrl;
+    else if (lang === "ur") url = dua.audioTitleUrduUrl;
+    else url = dua.audioTitleEnglishUrl;
+
+    if (url) return url;
+
+    const match = FALLBACK_DUAS.find((f) => f.slug === dua.slug || f._id === dua._id || f.title === dua.title);
+    if (match) {
+      if (lang === "ta") return match.audioTitleTamilUrl;
+      if (lang === "ur") return match.audioTitleUrduUrl;
+      return match.audioTitleEnglishUrl;
+    }
+    return undefined;
+  }
+
+  function getMeaningTrackUrl(dua: DuaItem, lang: TranslationLang): string | undefined {
+    let url: string | undefined;
+    if (lang === "ta") url = dua.audioTamilUrl;
+    else if (lang === "ur") url = dua.audioUrduUrl;
+    else url = dua.audioEnglishUrl;
+
+    if (url) return url;
+
+    const match = FALLBACK_DUAS.find((f) => f.slug === dua.slug || f._id === dua._id || f.title === dua.title);
+    if (match) {
+      if (lang === "ta") return match.audioTamilUrl;
+      if (lang === "ur") return match.audioUrduUrl;
+      return match.audioEnglishUrl;
+    }
+    return undefined;
+  }
+
+  function playNextAfterHeading(dua: DuaItem, audio: HTMLAudioElement, config: AudioSelectionConfig, lang: TranslationLang) {
+    if (config.playArabic && dua.audioUrl) {
+      updateAudioPhase("arabic");
+      audio.src = downloadManager.getAudioUrl(dua);
+      audio.currentTime = 0;
+      audio
+        .play()
+        .then(() => setPlayingAudioId(dua._id))
+        .catch((err) => {
+          console.warn("Arabic playback failed after heading:", err);
+          playNextAfterArabic(dua, audio, config, lang);
+        });
+      return;
+    }
+    playNextAfterArabic(dua, audio, config, lang);
+  }
+
+  function playNextAfterArabic(dua: DuaItem, audio: HTMLAudioElement, config: AudioSelectionConfig, lang: TranslationLang) {
+    if (config.playTranslation) {
+      const meaningUrl = getMeaningTrackUrl(dua, lang);
+      if (meaningUrl) {
+        updateAudioPhase("meaning");
+        audio.src = meaningUrl;
+        audio.currentTime = 0;
+        audio
+          .play()
+          .then(() => setPlayingAudioId(dua._id))
+          .catch((err) => {
+            console.warn("Meaning playback failed after arabic:", err);
+            updateAudioPhase("idle");
+            setPlayingAudioId(null);
+          });
+        return;
+      }
+    }
+    updateAudioPhase("idle");
+    setPlayingAudioId(null);
+    setAudioProgress(0);
+    setAudioCurrentTime(0);
+  }
+
+  // Audio Controller (Heading 1st along with Translation -> Arabic Recitation 2nd -> Meaning 3rd!)
   function handlePlayDua(dua: DuaItem) {
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
@@ -368,6 +468,7 @@ export default function App() {
     currentDuaRef.current = dua;
 
     const config = audioConfigRef.current;
+    const lang = selectedLang;
 
     // Mode 1: Only Read (silent reading mode)
     if (config.onlyRead || (!config.playArabic && !config.playTranslation)) {
@@ -377,11 +478,31 @@ export default function App() {
       return;
     }
 
-    // Mode 2: Play Arabic recitation if enabled
+    setSpeakingDuaId(null);
+
+    // Sequence Step 1: Heading Title (automatically plays if Translation is enabled)
+    if (config.playTranslation) {
+      const headingUrl = getHeadingTrackUrl(dua, lang);
+      if (headingUrl) {
+        updateAudioPhase("heading");
+        audio.src = headingUrl;
+        audio.currentTime = 0;
+        audio
+          .play()
+          .then(() => {
+            setPlayingAudioId(dua._id);
+          })
+          .catch((err) => {
+            console.warn("Heading audio play failed, skipping to next:", err);
+            playNextAfterHeading(dua, audio, config, lang);
+          });
+        return;
+      }
+    }
+
+    // Sequence Step 2: Arabic Recitation (if Translation is off or heading unavailable)
     if (config.playArabic && dua.audioUrl) {
-      setSpeakingDuaId(null);
       updateAudioPhase("arabic");
-      // Use downloaded offline blob or remote audioUrl
       audio.src = downloadManager.getAudioUrl(dua);
       audio.currentTime = 0;
       audio
@@ -390,18 +511,13 @@ export default function App() {
           setPlayingAudioId(dua._id);
         })
         .catch((err) => {
-          console.warn("Arabic audio play failed, trying meaning:", err);
-          if (config.playTranslation) {
-            playMeaningDirectly(dua);
-          } else {
-            updateAudioPhase("idle");
-            setPlayingAudioId(null);
-          }
+          console.warn("Arabic audio play failed, skipping to meaning:", err);
+          playNextAfterArabic(dua, audio, config, lang);
         });
       return;
     }
 
-    // Mode 3: Translation meaning only (if Arabic is unchecked or no Arabic audio exists)
+    // Sequence Step 3: Translation meaning only (if Arabic is disabled and no heading)
     if (config.playTranslation) {
       playMeaningDirectly(dua);
       return;
@@ -412,14 +528,11 @@ export default function App() {
     setPlayingAudioId(null);
   }
 
+
   function playMeaningDirectly(dua: DuaItem) {
     const audio = audioRef.current;
     if (!audio) return;
-    const meaningUrl =
-      selectedLang === "en" ? dua.audioEnglishUrl :
-      selectedLang === "ta" ? dua.audioTamilUrl :
-      selectedLang === "ur" ? dua.audioUrduUrl :
-      undefined;
+    const meaningUrl = getMeaningTrackUrl(dua, selectedLang);
 
     if (meaningUrl) {
       setSpeakingDuaId(null);

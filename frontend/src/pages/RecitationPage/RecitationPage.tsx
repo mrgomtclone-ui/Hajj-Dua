@@ -63,7 +63,7 @@ export const RecitationPage: React.FC<RecitationPageProps> = ({
           </button>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs sm:text-sm font-bold" style={{ color: "var(--text-heading)" }}>
+            <span className="text-sm sm:text-base font-extrabold" style={{ color: "var(--text-heading)", fontWeight: 800 }}>
               Arabic Audio Recitation
             </span>
             <span
@@ -92,16 +92,16 @@ export const RecitationPage: React.FC<RecitationPageProps> = ({
                   color: "var(--teal-bright)"
                 }}
               >
-                <Volume2 className="w-4 h-4" />
+                <Volume2 className="w-4 h-4 stroke-[2.5]" />
               </div>
-              <h2 className="text-lg sm:text-xl font-bold" style={{ color: "var(--text-heading)" }}>
+              <h2 className="text-lg sm:text-2xl font-extrabold" style={{ color: "var(--text-heading)", fontWeight: 800 }}>
                 Arabic Audio Recitation
               </h2>
             </div>
-            <p dir="rtl" className="font-urdu text-lg sm:text-xl mt-1 leading-relaxed" style={{ color: "var(--gold-light)" }}>
+            <p dir="rtl" className="font-urdu text-lg sm:text-xl mt-1 leading-relaxed font-bold" style={{ color: "var(--gold-light)", fontWeight: 700 }}>
               (عربی آڈیو میں مسنون دعائیں (Online / Offline
             </p>
-            <p className="text-xs sm:text-sm mt-1 max-w-xl" style={{ color: "var(--text-muted)" }}>
+            <p className="text-xs sm:text-sm mt-1 max-w-xl font-bold" style={{ color: "var(--text-muted)", fontWeight: 700 }}>
               Vocal recitations cached in your browser storage for full offline playback in Mecca & Medina.
             </p>
           </div>

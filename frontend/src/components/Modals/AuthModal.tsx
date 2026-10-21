@@ -76,7 +76,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             onClick={() => setAuthMode("login")}
             className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition ${
               authMode === "login"
-                ? "bg-gradient-to-r from-[#d4af37] to-[#aa8010] text-slate-950 shadow"
+                ? "bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow"
                 : ""
             }`}
             style={authMode !== "login" ? { color: "var(--text-muted)" } : undefined}
@@ -88,7 +88,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             onClick={() => setAuthMode("register")}
             className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition ${
               authMode === "register"
-                ? "bg-gradient-to-r from-[#d4af37] to-[#aa8010] text-slate-950 shadow"
+                ? "bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow"
                 : ""
             }`}
             style={authMode !== "register" ? { color: "var(--text-muted)" } : undefined}

@@ -19,6 +19,9 @@ const duaSchema = new Schema({
   audioEnglishUrl: String,
   audioTamilUrl: String,
   audioUrduUrl: String,
+  audioTitleEnglishUrl: String,
+  audioTitleTamilUrl: String,
+  audioTitleUrduUrl: String,
   verified: { type: Boolean, default: false }, // false => UI shows a "demo" label
 }, opts);
 duaSchema.index({ title: "text", "translations.en": "text", reference: "text" });

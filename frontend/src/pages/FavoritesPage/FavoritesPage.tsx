@@ -71,7 +71,7 @@ export const FavoritesPage: React.FC<FavoritesPageProps> = ({
           </button>
 
           <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-            <span className="text-xs sm:text-sm font-bold truncate" style={{ color: "var(--text-heading)" }}>
+            <span className="text-sm sm:text-base font-extrabold truncate" style={{ color: "var(--text-heading)", fontWeight: 800 }}>
               Favorite Duas
             </span>
             <span
@@ -86,7 +86,7 @@ export const FavoritesPage: React.FC<FavoritesPageProps> = ({
 
       {/* Navigation Tabs (Explore / Bookmarks / Playlists) */}
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 mt-3 sm:mt-6">
-        <div className="flex items-center justify-between gap-2 border-b border-[rgba(212,175,55,0.15)] pb-2 sm:pb-3 overflow-x-auto scrollbar-none">
+        <div className="flex items-center justify-between gap-2 border-b border-[var(--border-gold)] pb-2 sm:pb-3 overflow-x-auto scrollbar-none">
           <div className="flex items-center gap-1.5 sm:gap-2 flex-nowrap py-0.5">
             <button
               onClick={onNavigateToDuas}

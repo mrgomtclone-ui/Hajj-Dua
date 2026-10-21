@@ -90,8 +90,8 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Center Content */}
           <div className="text-center pr-12 pl-4 sm:px-14">
             <h3
-              className="text-base sm:text-lg font-bold tracking-wide transition-colors"
-              style={{ color: "var(--event-text)" }}
+              className="text-base sm:text-xl font-extrabold tracking-wide transition-colors"
+              style={{ color: "var(--event-text)", fontWeight: 800 }}
             >
               {selectedLang === "ur"
                 ? "آن لائن دعائیں (حج و عمرہ)"
@@ -103,12 +103,12 @@ export const HomePage: React.FC<HomePageProps> = ({
               dir={selectedLang === "ur" ? "rtl" : "ltr"}
               className={`${
                 selectedLang === "ur"
-                  ? "font-urdu text-xl sm:text-2xl"
+                  ? "font-urdu text-xl sm:text-2xl font-bold"
                   : selectedLang === "ta"
-                  ? "font-sans text-sm sm:text-base font-semibold"
-                  : "font-sans text-xs sm:text-sm font-medium"
+                  ? "font-sans text-sm sm:text-base font-bold"
+                  : "font-sans text-xs sm:text-sm font-bold"
               } mt-1.5 sm:mt-2 leading-relaxed tracking-wide`}
-              style={{ color: "var(--event-text-sub)" }}
+              style={{ color: "var(--event-text-sub)", fontWeight: 700 }}
             >
               {selectedLang === "ur"
                 ? "(Online • حج اور عمرہ کی دعائیں)"
@@ -180,8 +180,8 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             <h3
-              className="text-base sm:text-lg font-bold tracking-wide transition-colors"
-              style={{ color: "var(--event-text)" }}
+              className="text-base sm:text-xl font-extrabold tracking-wide transition-colors"
+              style={{ color: "var(--event-text)", fontWeight: 800 }}
             >
               {selectedLang === "ur"
                 ? "آف لائن دعائیں (آڈیو ڈاؤنلوڈز و تلاوت)"
@@ -193,12 +193,12 @@ export const HomePage: React.FC<HomePageProps> = ({
               dir={selectedLang === "ur" ? "rtl" : "ltr"}
               className={`${
                 selectedLang === "ur"
-                  ? "font-urdu text-xl sm:text-2xl"
+                  ? "font-urdu text-xl sm:text-2xl font-bold"
                   : selectedLang === "ta"
-                  ? "font-sans text-sm sm:text-base font-semibold"
-                  : "font-sans text-xs sm:text-sm font-medium"
+                  ? "font-sans text-sm sm:text-base font-bold"
+                  : "font-sans text-xs sm:text-sm font-bold"
               } mt-1.5 sm:mt-2 leading-relaxed tracking-wide`}
-              style={{ color: "var(--event-text-sub)" }}
+              style={{ color: "var(--event-text-sub)", fontWeight: 700 }}
             >
               {selectedLang === "ur"
                 ? "(Offline • عربی آڈیو ڈاؤنلوڈز • بغیر انٹرنیٹ سنیں)"
@@ -241,7 +241,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             title="More Information"
             aria-label="More Information"
           >
-            <Info className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+            <Info className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5]" />
           </button>
         </div>
       </div>
@@ -267,10 +267,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           >
             <Heart className={`w-6 h-6 sm:w-7 sm:h-7 ${bookmarksCount > 0 ? "fill-current text-red-500" : ""}`} />
           </div>
-          <span className="text-sm sm:text-base font-bold tracking-wide" style={{ color: "var(--event-text)" }}>
+          <span className="text-sm sm:text-base font-extrabold tracking-wide" style={{ color: "var(--event-text)", fontWeight: 800 }}>
             {selectedLang === "ur" ? "پسندیدہ دعائیں" : selectedLang === "ta" ? "விருப்பமானவை" : "Favorite Duas"}
           </span>
-          <span className="text-[10px] sm:text-xs mt-0.5 font-medium" style={{ color: "var(--event-text-sub)" }}>
+          <span className="text-[10px] sm:text-xs mt-0.5 font-bold" style={{ color: "var(--event-text-sub)", fontWeight: 700 }}>
             {bookmarksCount} saved
           </span>
         </button>
@@ -294,10 +294,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           >
             <Bookmark className={`w-6 h-6 sm:w-7 sm:h-7 ${playlistsCount > 0 ? "fill-current text-[#14c4bb]" : ""}`} />
           </div>
-          <span className="text-sm sm:text-base font-bold tracking-wide" style={{ color: "var(--event-text)" }}>
+          <span className="text-sm sm:text-base font-extrabold tracking-wide" style={{ color: "var(--event-text)", fontWeight: 800 }}>
             {selectedLang === "ur" ? "دعا بک مارکس" : selectedLang === "ta" ? "புக்மார்க்குகள்" : "Dua Bookmarks"}
           </span>
-          <span className="text-[10px] sm:text-xs mt-0.5 font-medium" style={{ color: "var(--event-text-sub)" }}>
+          <span className="text-[10px] sm:text-xs mt-0.5 font-bold" style={{ color: "var(--event-text-sub)", fontWeight: 700 }}>
             {playlistsCount} {playlistsCount === 1 ? "playlist" : "playlists"}
           </span>
         </button>
