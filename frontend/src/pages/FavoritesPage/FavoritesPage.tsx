@@ -144,7 +144,7 @@ export const FavoritesPage: React.FC<FavoritesPageProps> = ({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 items-start">
             {favoriteDuas.map((dua) => {
               const isPlaying = playingAudioId === dua._id || speakingDuaId === dua._id;
               const isPlayingAudio = playingAudioId === dua._id;

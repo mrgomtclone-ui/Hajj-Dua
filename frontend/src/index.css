@@ -364,11 +364,11 @@ body {
   background: linear-gradient(135deg, var(--arabic-bg-1), var(--arabic-bg-2));
   border: 1px solid var(--border-gold);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 1rem 1.25rem;
   position: relative;
 }
 .arabic-block p {
-  line-height: 2.7;
+  line-height: 2.2;
 }
 .arabic-block::after {
   content: '﷽';

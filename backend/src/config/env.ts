@@ -8,6 +8,9 @@ const schema = z.object({
   JWT_SECRET: z.string().min(32, "JWT_SECRET must be at least 32 characters."),
   COOKIE_SECURE: z.coerce.boolean().default(false),
   AUDIO_DIR: z.string().default("./storage/audio"),
+  CLOUDINARY_CLOUD_NAME: z.string().optional(),
+  CLOUDINARY_API_KEY: z.string().optional(),
+  CLOUDINARY_API_SECRET: z.string().optional(),
 });
 
 const parsed = schema.safeParse(process.env);

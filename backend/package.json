@@ -6,10 +6,12 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "seed": "tsx src/seed/seed.ts"
+    "seed": "tsx src/seed/seed.ts",
+    "migrate:audio": "tsx src/scripts/migrateAudiosToCloudinary.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.11.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.0",

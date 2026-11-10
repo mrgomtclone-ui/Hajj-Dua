@@ -17,6 +17,7 @@ dist/
 build/
 out/
 *.tsbuildinfo
+storage/
 
 # Debug logs
 logs

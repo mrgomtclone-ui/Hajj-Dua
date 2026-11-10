@@ -86,7 +86,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
   return (
     <div
       onClick={() => onPlay(dua)}
-      className={`glass-card rounded-2xl p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between relative group cursor-pointer ${
+      className={`glass-card rounded-2xl p-5 sm:p-6 transition-all duration-300 flex flex-col justify-between relative group cursor-pointer h-fit ${
         isPlaying ? "playing-card" : ""
       }`}
       title="Click anywhere to play / pause audio"
@@ -153,6 +153,33 @@ export const DuaCard: React.FC<DuaCardProps> = ({
                 </span>
                 <span className="sm:hidden">{isPlaying ? "Playing" : "Audio"}</span>
               </span>
+            ) : (dua.audioEnglishUrl || dua.audioTamilUrl || dua.audioUrduUrl) ? (
+              <span
+                onClick={(e) => {
+                  if (onOpenAudioSelection) {
+                    e.stopPropagation();
+                    onOpenAudioSelection();
+                  }
+                }}
+                className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border flex items-center gap-1 transition ${
+                  onOpenAudioSelection ? "cursor-pointer hover:brightness-110 active:scale-95" : ""
+                }`}
+                style={{
+                  background: isPlaying ? "rgba(20,196,187,0.22)" : "rgba(15,150,144,0.14)",
+                  color: "var(--teal-bright)",
+                  borderColor: isPlaying ? "rgba(20,196,187,0.5)" : "rgba(20,196,187,0.35)"
+                }}
+                title={onOpenAudioSelection ? "Configure Audio Selection (Voice Translation, Reading Mode)" : undefined}
+              >
+                <Volume2
+                  className={`w-2.5 h-2.5 ${isPlaying ? "animate-pulse" : ""}`}
+                  style={{ color: "var(--teal-bright)" }}
+                />
+                <span className="hidden sm:inline">
+                  {isPlaying ? "Playing Now" : "AI Voice"}
+                </span>
+                <span className="sm:hidden">{isPlaying ? "Playing" : "Voice"}</span>
+              </span>
             ) : null}
 
             <span className="text-[10px] uppercase font-bold" style={{ color: "var(--text-subtle)" }}>
@@ -163,7 +190,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
           {/* Top Right Actions: Download & Bookmark */}
           <div className="flex items-center gap-1.5">
             {/* Spotify-style Download Button */}
-            {dua.audioUrl && onToggleDownload && (
+            {(dua.audioUrl || dua.audioEnglishUrl || dua.audioTamilUrl || dua.audioUrduUrl) && onToggleDownload && (
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -244,10 +271,10 @@ export const DuaCard: React.FC<DuaCardProps> = ({
               fontFamily: "'Amiri', 'Scheherazade New', serif",
               color: "var(--text-primary)",
               fontWeight: 700,
-              lineHeight: fontSizeLarge ? 3.0 : 2.7,
+              lineHeight: fontSizeLarge ? 2.4 : 2.1,
               wordSpacing: "0.15em",
-              paddingTop: "0.5rem",
-              paddingBottom: "0.5rem"
+              paddingTop: "0.25rem",
+              paddingBottom: "0.25rem"
             }}
           >
             {dua.arabicText}
@@ -324,9 +351,17 @@ export const DuaCard: React.FC<DuaCardProps> = ({
                   ? "Play Offline Audio 💾"
                   : dua.audioUrl
                   ? "Play Arabic Audio"
+                  : (dua.audioEnglishUrl || dua.audioTamilUrl || dua.audioUrduUrl)
+                  ? "Play Voice Audio"
                   : "Listen & Recite"}
               </span>
-              <span className="sm:hidden">{isDownloaded ? "Play Offline 💾" : dua.audioUrl ? "Play Audio" : "Listen"}</span>
+              <span className="sm:hidden">
+                {isDownloaded
+                  ? "Play Offline 💾"
+                  : (dua.audioUrl || dua.audioEnglishUrl || dua.audioTamilUrl || dua.audioUrduUrl)
+                  ? "Play Audio"
+                  : "Listen"}
+              </span>
             </>
           )}
         </button>

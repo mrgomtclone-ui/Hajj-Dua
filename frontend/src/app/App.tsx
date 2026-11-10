@@ -223,6 +223,10 @@ export default function App() {
               ? {
                   ...fb,
                   ...d,
+                  audioUrl: d.audioUrl || fb.audioUrl,
+                  audioEnglishUrl: d.audioEnglishUrl || fb.audioEnglishUrl,
+                  audioTamilUrl: d.audioTamilUrl || fb.audioTamilUrl,
+                  audioUrduUrl: d.audioUrduUrl || fb.audioUrduUrl,
                   audioTitleEnglishUrl: d.audioTitleEnglishUrl || fb.audioTitleEnglishUrl,
                   audioTitleTamilUrl: d.audioTitleTamilUrl || fb.audioTitleTamilUrl,
                   audioTitleUrduUrl: d.audioTitleUrduUrl || fb.audioTitleUrduUrl
@@ -241,6 +245,10 @@ export default function App() {
               ? {
                   ...fb,
                   ...d,
+                  audioUrl: d.audioUrl || fb.audioUrl,
+                  audioEnglishUrl: d.audioEnglishUrl || fb.audioEnglishUrl,
+                  audioTamilUrl: d.audioTamilUrl || fb.audioTamilUrl,
+                  audioUrduUrl: d.audioUrduUrl || fb.audioUrduUrl,
                   audioTitleEnglishUrl: d.audioTitleEnglishUrl || fb.audioTitleEnglishUrl,
                   audioTitleTamilUrl: d.audioTitleTamilUrl || fb.audioTitleTamilUrl,
                   audioTitleUrduUrl: d.audioTitleUrduUrl || fb.audioTitleUrduUrl

@@ -58,7 +58,7 @@ export class DownloadManager {
         const cache = await caches.open(CACHE_NAME);
         const keys = await cache.keys();
         for (const req of keys) {
-          if (req.url.includes("/Duas/")) {
+          if (req.url.includes("cloudinary.com") || req.url.includes("/Duas/")) {
             // Found audio in cache
           }
         }
