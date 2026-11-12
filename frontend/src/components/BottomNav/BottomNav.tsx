@@ -1,5 +1,5 @@
 import React from "react";
-import { Home as HomeIcon, BookOpen, Bookmark, ListMusic, Download } from "lucide-react";
+import { Home as HomeIcon, BookOpen, Bookmark, ListMusic, Download, Sparkles } from "lucide-react";
 
 export type NavTab = "home" | "explore" | "downloads" | "recitation" | "bookmarks" | "playlists";
 
@@ -75,7 +75,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           <span className="text-[9.5px] sm:text-[10px] mt-0.5 truncate max-w-full tracking-tight">Offline</span>
         </button>
 
-        {/* Favorites */}
+        {/* Zikr */}
         <button
           onClick={() => onTabChange("bookmarks")}
           className={`flex-1 min-w-0 flex flex-col items-center py-1 px-0.5 rounded-xl transition-all active:scale-95 relative ${
@@ -84,17 +84,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           style={{ color: activeTab === "bookmarks" ? "var(--gold-bright)" : "var(--text-muted)" }}
         >
           <div className="relative">
-            <Bookmark className="w-4 h-4 sm:w-5 sm:h-5" />
-            {bookmarksCount > 0 && (
-              <span
-                className="absolute -top-1 -right-2 w-3.5 h-3.5 rounded-full text-slate-900 text-[8px] font-bold flex items-center justify-center"
-                style={{ background: "var(--gold-bright)" }}
-              >
-                {bookmarksCount}
-              </span>
-            )}
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <span className="text-[9.5px] sm:text-[10px] mt-0.5 truncate max-w-full tracking-tight">Saved</span>
+          <span className="text-[9.5px] sm:text-[10px] mt-0.5 truncate max-w-full tracking-tight">Zikr</span>
         </button>
 
         {/* Playlists */}

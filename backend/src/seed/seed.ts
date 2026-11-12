@@ -921,6 +921,34 @@ const rows = [
     source: "Manasik al-Hajj & Al-Adhkar",
     reference: "Dua Beneath Meezab al-Rahmah",
     verified: true
+  },
+  {
+    slug: "morning-dua-adhkar-omar-hisham",
+    order: 29,
+    title: "Morning Dua (adhkar) Omar Hisham",
+    titles: {
+      en: "Morning Dua (adhkar) Omar Hisham",
+      ta: "காலை துஆ & அத்கார் (Morning Adhkar) - உமர் ஹிஷாம்",
+      ur: "صبح کے اذکار و دعائیں (عمر ہشام)"
+    },
+    category: "Zikr",
+    kind: "hadith",
+    arabicText: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ. رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هٰذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هٰذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.",
+    transliteration: "Asbaḥnā wa-asbaḥal-mulku lillāhi wal-ḥamdu lillāhi, lā ilāha illallāhu waḥdahu lā sharīka lahu, lahul-mulku wa lahul-ḥamdu wa huwa ‘alā kulli shay’in qadīr. Rabbi as’aluka khayra mā fī hādhāl-yawmi wa khayra mā ba‘dah, wa a‘ūdhu bika min sharri mā fī hādhāl-yawmi wa sharri mā ba‘dah, Rabbi a‘ūdhu bika minal-kasali wa sū’il-kibar, Rabbi a‘ūdhu bika min ‘adhābin fin-nāri wa ‘adhābin fil-qabr.",
+    transliterations: {
+      en: "Asbaḥnā wa-asbaḥal-mulku lillāhi wal-ḥamdu lillāhi, lā ilāha illallāhu waḥdahu lā sharīka lahu, lahul-mulku wa lahul-ḥamdu wa huwa ‘alā kulli shay’in qadīr. Rabbi as’aluka khayra mā fī hādhāl-yawmi wa khayra mā ba‘dah, wa a‘ūdhu bika min sharri mā fī hādhāl-yawmi wa sharri mā ba‘dah, Rabbi a‘ūdhu bika minal-kasali wa sū’il-kibar, Rabbi a‘ūdhu bika min ‘adhābin fin-nāri wa ‘adhābin fil-qabr.",
+      ta: "அஸ்பஹ்னா வ அஸ்பஹல் முல்க்கு லில்லாஹி வல்ஹம்து லில்லாஹி, லா இலாஹ இல்லல்லாஹு வஹ்தஹு லா ஷரீக்க லஹு, லஹுல் முல்க்கு வலஹுல் ஹம்து வஹுவ அலா குல்லி ஷையின் கதீர். ரப்பீ அஸ்அலுக கைர மா ஃபீ ஹாஸல் யவ்மி வகைர மா பஃதஹ், வஅஊது பிக மின் ஷர்ரி மா ஃபீ ஹாஸல் யவ்மி வஷர்ரி மா பஃதஹ், ரப்பீ அஊது பிக மினல் கஸலி வசூஇல் கிபர், ரப்பீ அஊது பிக மின் அதாபின் ஃபின்னாரி வ அதாபின் ஃபில் கப்ர்.",
+      ur: "اصبحنا واصبح الملک للہ والحمد للہ، لا الہ الا اللہ وحدہ لا شریک لہ، لہ الملک ولہ الحمد وہو علیٰ کل شیء قدیر۔ رب اسألک خیر ما فی ھذا الیوم وخیر ما بعدہ، واعوذ بک من شر ما فی ھذا الیوم وشر ما بعدہ، رب اعوذ بک من الکسل وسوء الکبر، رب اعوذ بک من عذاب فی النار وعذاب فی القبر۔"
+    },
+    translations: {
+      en: "We have reached the morning and at this very time all sovereignty belongs to Allah, and all praise is for Allah. None has the right to be worshipped except Allah alone, without partner. To Him belongs all sovereignty and praise and He has power over all things. My Lord, I ask You for the good of what is in this day and the good of what comes after it, and I seek refuge in You from the evil of what is in this day and the evil of what comes after it. My Lord, I seek refuge in You from laziness and the hardships of old age. My Lord, I seek refuge in You from the punishment of the Fire and the punishment of the grave.",
+      ta: "நாங்களும் காலைப் பொழுதை அடைந்தோம்; முழு ஆட்சியும் அல்லாஹ்வுக்கே உரியதாக இருக்கும் நிலையில் காலைப் பொழுதை அடைந்தது; புகழ் அனைத்தும் அல்லாஹ்வுக்கே உரியது; அல்லாஹ்வைத் தவிர வேறு இறைவனில்லை; அவன் தனித்தவன்; அவனுக்கு இணை யாருமில்லை; அவனுக்கே ஆட்சியும் அவனுக்கே புகழும் உரியன; மேலும் அவன் அனைத்துப் பொருட்கள் மீதும் பேராற்றல் உள்ளவன்...",
+      ur: "ہم نے صبح کی اور اللہ کے سارے ملک نے صبح کی اور تمام تعریفیں اللہ ہی کے لیے ہیں، اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کی بادشاہت ہے اور اسی کے لیے تعریف ہے، اور وہ ہر چیز پر قادر ہے۔ اے میرے رب! میں تجھ سے اس دن کی بھلائی اور اس کے بعد کی بھلائی کا سوال کرتا ہوں، اور اس دن کے شر اور اس کے بعد کے شر سے تیری پناہ مانگتا ہوں..."
+    },
+    audioUrl: "https://res.cloudinary.com/of1qk9bu/video/upload/v1794408722/hajj-duas/Morning_Dua_adhkar_Omar_Hisham.mp4",
+    source: "Omar Hisham Al Arabi (عمر هشام العربي)",
+    reference: "Sahih Muslim 2723 • Sacred Morning Adhkar Recitation",
+    verified: true
   }
 ];
 

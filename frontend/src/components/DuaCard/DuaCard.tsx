@@ -22,7 +22,7 @@ export interface DuaCardProps {
   dua: DuaItem & { verified?: boolean };
   selectedLang: TranslationLang;
   fontSizeLarge: boolean;
-  isBookmarked: boolean;
+  isBookmarked?: boolean;
   isPlaying: boolean;
   isPlayingAudio: boolean;
   audioDuration: number;
@@ -32,7 +32,7 @@ export interface DuaCardProps {
   isDownloading?: boolean;
   downloadProgress?: number;
   onPlay: (dua: DuaItem) => void;
-  onToggleBookmark: (id: string) => void;
+  onToggleBookmark?: (id: string) => void;
   onCopy: (dua: DuaItem) => void;
   onShare: (dua: DuaItem) => void;
   onAddToPlaylist: (dua: DuaItem) => void;
@@ -187,7 +187,7 @@ export const DuaCard: React.FC<DuaCardProps> = ({
             </span>
           </div>
 
-          {/* Top Right Actions: Download & Bookmark */}
+          {/* Top Right Actions: Download */}
           <div className="flex items-center gap-1.5">
             {/* Spotify-style Download Button */}
             {(dua.audioUrl || dua.audioEnglishUrl || dua.audioTamilUrl || dua.audioUrduUrl) && onToggleDownload && (
@@ -229,23 +229,6 @@ export const DuaCard: React.FC<DuaCardProps> = ({
                 )}
               </button>
             )}
-
-            {/* Bookmark Button */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleBookmark(dua._id);
-              }}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition active:scale-90 shadow-sm"
-              style={{
-                background: isBookmarked ? "rgba(16,185,129,0.18)" : "var(--bg-input)",
-                border: isBookmarked ? "1px solid var(--border-gold-md)" : "1px solid var(--border-gold)",
-                color: isBookmarked ? "var(--gold-bright)" : "var(--text-muted)"
-              }}
-              title={isBookmarked ? "Remove Bookmark" : "Add to Bookmarks"}
-            >
-              <Bookmark className={`w-4.5 h-4.5 ${isBookmarked ? "fill-current" : ""}`} />
-            </button>
           </div>
         </div>
 

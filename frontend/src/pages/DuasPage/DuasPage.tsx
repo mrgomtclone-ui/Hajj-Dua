@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft, BookOpen, Bookmark, ListMusic } from "lucide-react";
+import { ArrowLeft, BookOpen, Bookmark, ListMusic, Sparkles } from "lucide-react";
 import type { DuaItem, TranslationLang, Playlist } from "../../types";
 import { DuaCard } from "../../components/DuaCard";
 
@@ -115,11 +115,8 @@ export const DuasPage: React.FC<DuasPageProps> = ({
               className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition flex-shrink-0"
               style={{ color: "var(--text-muted)" }}
             >
-              <Bookmark className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>Favorites</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/20">
-                {bookmarks.size}
-              </span>
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
+              <span>{selectedLang === "ur" ? "ذکر" : selectedLang === "ta" ? "திக்ர்" : "Zikr"}</span>
             </button>
 
             <button

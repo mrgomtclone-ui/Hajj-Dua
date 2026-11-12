@@ -1,5 +1,5 @@
 import React from "react";
-import { Info, Heart, Bookmark, Download, Globe } from "lucide-react";
+import { Info, Heart, Bookmark, Download, Globe, Sparkles } from "lucide-react";
 import type { TranslationLang, EventInfo } from "../../types";
 
 export interface HomePageProps {
@@ -246,9 +246,9 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </div>
 
-      {/* 2-Column Action Grid: Favorite Duas & Dua Bookmarks */}
+      {/* 2-Column Action Grid: Zikr & Dua Bookmarks */}
       <div className="grid grid-cols-2 gap-3.5 sm:gap-4 mt-3.5 sm:mt-4">
-        {/* Action 1: Favorite Duas (Heart Icon) */}
+        {/* Action 1: Zikr (Daily Remembrance & Tasbeeh) */}
         <button
           onClick={onNavigateToFavorites}
           className="glass-card rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-center text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 border group select-none"
@@ -261,17 +261,17 @@ export const HomePage: React.FC<HomePageProps> = ({
             className="w-13 h-13 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mb-2 sm:mb-2.5 shadow-inner transition-transform group-hover:scale-105"
             style={{
               background: "var(--event-circle-bg)",
-              color: bookmarksCount > 0 ? "#ef4444" : "var(--gold-bright)",
+              color: "var(--gold-bright)",
               border: "1px solid var(--event-border)"
             }}
           >
-            <Heart className={`w-6 h-6 sm:w-7 sm:h-7 ${bookmarksCount > 0 ? "fill-current text-red-500" : ""}`} />
+            <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-amber-400" />
           </div>
           <span className="text-sm sm:text-base font-extrabold tracking-wide" style={{ color: "var(--event-text)", fontWeight: 800 }}>
-            {selectedLang === "ur" ? "پسندیدہ دعائیں" : selectedLang === "ta" ? "விருப்பமானவை" : "Favorite Duas"}
+            {selectedLang === "ur" ? "ذکر" : selectedLang === "ta" ? "திக்ர் (Zikr)" : "Zikr"}
           </span>
           <span className="text-[10px] sm:text-xs mt-0.5 font-bold" style={{ color: "var(--event-text-sub)", fontWeight: 700 }}>
-            {bookmarksCount} saved
+            {selectedLang === "ur" ? "روزمرہ اذکار و تسبیح" : selectedLang === "ta" ? "தினசரி திக்ர்" : "Daily Remembrance"}
           </span>
         </button>
 

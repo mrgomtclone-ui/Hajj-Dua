@@ -11,7 +11,7 @@ import type {
   Playlist,
   AudioSelectionConfig
 } from "../types";
-import { FALLBACK_DUAS } from "../data/fallbackDuas";
+import { FALLBACK_DUAS, MORNING_ZIKR_DUA } from "../data/fallbackDuas";
 export type { DuaItem, TranslationLang };
 
 // Modular Page Folders
@@ -488,6 +488,24 @@ export default function App() {
 
     setSpeakingDuaId(null);
 
+    // Standalone / Direct Audio Track (e.g. Omar Hisham Morning Dua / Zikr Audio)
+    if (dua.audioUrl && !dua.audioEnglishUrl && !dua.audioTamilUrl && !dua.audioUrduUrl) {
+      updateAudioPhase("arabic");
+      audio.src = downloadManager.getAudioUrl(dua);
+      audio.currentTime = 0;
+      audio
+        .play()
+        .then(() => {
+          setPlayingAudioId(dua._id);
+        })
+        .catch((err) => {
+          console.warn("Direct audio play failed:", err);
+          updateAudioPhase("idle");
+          setPlayingAudioId(null);
+        });
+      return;
+    }
+
     // Sequence Step 1: Heading Title (automatically plays if Translation is enabled)
     if (config.playTranslation) {
       const headingUrl = getHeadingTrackUrl(dua, lang);
@@ -612,6 +630,31 @@ export default function App() {
     const audio = audioRef.current;
     if (!audio) return;
     audio.currentTime = Math.max(0, Math.min(audio.currentTime + seconds, audio.duration || 0));
+    setAudioCurrentTime(audio.currentTime);
+    if (audio.duration) {
+      setAudioProgress((audio.currentTime / audio.duration) * 100);
+    }
+  }
+
+  function handleSeekSeconds(seconds: number) {
+    const audio = audioRef.current;
+    if (!audio || !audio.duration) return;
+    const clamped = Math.max(0, Math.min(seconds, audio.duration));
+    audio.currentTime = clamped;
+    setAudioCurrentTime(clamped);
+    setAudioProgress((clamped / audio.duration) * 100);
+  }
+
+  function handleSetPlaybackRate(rate: number) {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = rate;
+    }
+  }
+
+  function handleToggleLoop(loop: boolean) {
+    if (audioRef.current) {
+      audioRef.current.loop = loop;
+    }
   }
 
   function dismissPlayer() {
@@ -981,6 +1024,14 @@ export default function App() {
           onCopyDua={copyDua}
           onShareDua={shareDua}
           onAddToPlaylist={setDuaToAddToPlaylist}
+          onSeekAudio={handleSeekSeconds}
+          onSkipAudio={skipAudio}
+          onToggleDownload={handleToggleDownload}
+          isMorningDuaDownloaded={downloadState.downloadedIds.has(MORNING_ZIKR_DUA._id)}
+          isMorningDuaDownloading={downloadState.downloadingIds.has(MORNING_ZIKR_DUA._id)}
+          morningDuaDownloadProgress={downloadState.progress[MORNING_ZIKR_DUA._id] || 0}
+          onSetPlaybackRate={handleSetPlaybackRate}
+          onToggleLoop={handleToggleLoop}
           onOpenAudioSelection={() => setShowAudioSelectionModal(true)}
           onBackToHome={() => {
             setActiveTab("home");
